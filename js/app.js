@@ -13,6 +13,15 @@ function adicionar() {
     let valorProduto = document.querySelector('.produto-input').value.split(" - ")[1];
     let quantidade = document.querySelector('.quantidade-input').value;
 
+    // Desafio pós aulas de impedir a adição de um produto com quantidade inválida
+    if(quantidade = '' || quantidade <= 0) {
+        alert('Precisa informar a quantidade!');
+        return;
+    }
+
+    // Na aula calcularam o valor do produto x a quantidade pra adicionar no carrinho (adicionei também)
+    let valorProdutoTotal = 'R$' + valorProduto.split('$')[1] * quantidade;
+
     // Definindo todas as variáveis de elementos antes pra criar condicional com base nelas
     // Criei a variável carrinho pra representar a lista de produtos no carrinho
     let carrinho = document.querySelector('.carrinho__produtos');
@@ -27,7 +36,7 @@ function adicionar() {
     //aqui eu adicionei um atributo id pra ajudar na condicional
     itemLista.setAttribute('id', `${produto}`);
 
-    // Essa condicional verifica se, ao adicionar um produto no carrinho, ele já está listado lá
+    // Essa condicional verifica se, ao adicionar um produto no carrinho, ele já está listado lá (não foi feito na solução na aula, então fiquei feliz de ter feito)
     // Dessa forma, caso esteja, ela não adiciona uma nova linha na lista, e sim, soma a quantidade no produto que já está lá
     // (isso foi bem difícil hahahaha, com certeza tem uma forma mais simples de fazer, mas fui testando coisas, pesquisando métodos, e cheguei nesse modelo)
     if(document.querySelector('.carrinho__produtos').textContent.includes(`${produto}`)) {
@@ -60,13 +69,15 @@ function adicionar() {
 
         // E o valor
         valorCarrinho.classList.add('texto-azul');
-        valorCarrinho.innerHTML = `${valorProduto}`;
+        valorCarrinho.innerHTML = `${valorProdutoTotal}`;
         itemLista.appendChild(valorCarrinho);
 
         // Atualizo o valor total do carrinho        
         valorTotal = valorTotal + (valorProduto.split('$')[1] * quantidade);
         valorFinal.lastElementChild.innerHTML = `R$${valorTotal}`;
     }
+    // Na aula adicionaram essa linha que zera a quantidade
+    document.querySelector('.quantidade-input').value = '';
 }
 
 // Criei a função limpar
