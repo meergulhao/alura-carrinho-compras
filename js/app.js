@@ -14,13 +14,10 @@ function adicionar() {
     let quantidade = document.querySelector('.quantidade-input').value;
 
     // Desafio pós aulas de impedir a adição de um produto com quantidade inválida
-    if(quantidade = '' || quantidade <= 0) {
+    if(quantidade == '' || quantidade <= 0) {
         alert('Precisa informar a quantidade!');
         return;
     }
-
-    // Na aula calcularam o valor do produto x a quantidade pra adicionar no carrinho (adicionei também)
-    let valorProdutoTotal = 'R$' + valorProduto.split('$')[1] * quantidade;
 
     // Definindo todas as variáveis de elementos antes pra criar condicional com base nelas
     // Criei a variável carrinho pra representar a lista de produtos no carrinho
@@ -69,7 +66,7 @@ function adicionar() {
 
         // E o valor
         valorCarrinho.classList.add('texto-azul');
-        valorCarrinho.innerHTML = `${valorProdutoTotal}`;
+        valorCarrinho.innerHTML = `${valorProduto}`;
         itemLista.appendChild(valorCarrinho);
 
         // Atualizo o valor total do carrinho        
